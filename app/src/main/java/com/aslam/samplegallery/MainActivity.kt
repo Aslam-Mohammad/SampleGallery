@@ -12,10 +12,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun getLayoutId() = R.layout.activity_main
 
-    override fun hasConnectivity(connectivity: Boolean) {
-        if (!connectivity)
-            noConnectivity()
-    }
 
     override fun getViewModel(): BaseViewModel? {
         return null

@@ -1,7 +1,6 @@
 package com.aslam.samplegallery
 
 import android.app.Application
-import com.aslam.samplegallery.di.repositoryModule
 import com.aslam.samplegallery.di.sharedPrefModule
 import com.aslam.samplegallery.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -14,7 +13,7 @@ class App : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@App)
-            modules(repositoryModule+viewModelModule+sharedPrefModule
+            modules(viewModelModule+sharedPrefModule
             )
         }
 
