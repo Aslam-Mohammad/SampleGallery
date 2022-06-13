@@ -7,7 +7,7 @@ import com.aslam.samplegallery.data.DataItem
 import com.aslam.samplegallery.databinding.ItemDataBinding
 
 class DataDisplayAdapter(
-    private val clickListener:(result: Int) -> Unit
+    private val clickListener:(result: DataItem,position:Int) -> Unit
 ):BaseAdapter<ItemDataBinding>() {
     init {
         addData(ArrayList<DataItem>())

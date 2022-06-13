@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
 
         <variable
             name="data"
@@ -34,7 +35,13 @@
                     android:scaleType="centerCrop"
                     loadImage="@{data.itemPath}"
                     tools:ignore="ContentDescription" />
-
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="33dp"
+                    android:src="@drawable/play_icon"
+                    android:visibility="@{data.isImage ? View.GONE: View.VISIBLE}"/>
             </FrameLayout>
 
 

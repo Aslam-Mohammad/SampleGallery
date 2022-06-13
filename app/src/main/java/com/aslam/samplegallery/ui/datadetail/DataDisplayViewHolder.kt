@@ -7,7 +7,7 @@ import com.aslam.samplegallery.databinding.ItemDataBinding
 
 class DataDisplayViewHolder(
     view: ItemDataBinding,
-    val clickListener: (result: Int) -> Unit
+    val clickListener: (result: DataItem,position:Int) -> Unit
 ): BaseViewHolder<ItemDataBinding>(view) {
 
     private lateinit var data: DataItem
@@ -23,7 +23,7 @@ class DataDisplayViewHolder(
     }
 
     override fun onClick(v: View?) {
-        clickListener(itemPosition)
+        clickListener(data,itemPosition)
     }
 
     override fun onLongClick(v: View?): Boolean {
