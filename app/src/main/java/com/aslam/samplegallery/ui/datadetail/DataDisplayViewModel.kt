@@ -3,6 +3,7 @@ package com.aslam.samplegallery.ui.datadetail
 import android.content.ContentResolver
 import android.database.Cursor
 import android.provider.MediaStore
+import android.util.Log
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.aslam.samplegallery.base.BaseViewModel
@@ -24,7 +25,7 @@ class DataDisplayViewModel : BaseViewModel() {
         if (this::_allDataListLiveData.isInitialized)
             allDataListResultLiveData.removeSource(_allDataListLiveData)
 
-        _allDataListLiveData = getAllImagesByFolder(contentResolver, path,image)!!
+        _allDataListLiveData = getAllImagesOrVideosByFolder(contentResolver, path,image)!!
         allDataListResultLiveData.addSource(_allDataListLiveData) { outcome ->
             outcome.let {
                 allDataListResultLiveData.value = it
@@ -33,12 +34,12 @@ class DataDisplayViewModel : BaseViewModel() {
         }
     }
 
-    fun getAllImagesByFolder(
+    fun getAllImagesOrVideosByFolder(
         contentResolver: ContentResolver,
         path: String,
         isImage: Boolean
     ): MutableLiveData<Result<List<DataItem>>>? {
-        var images: ArrayList<DataItem> = ArrayList<DataItem>()
+        var files: ArrayList<DataItem> = ArrayList<DataItem>()
         var cursor: Cursor?=null
         if (isImage) {
             val allImagessuri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
@@ -72,20 +73,22 @@ class DataDisplayViewModel : BaseViewModel() {
                     cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.SIZE)),
                         isImage)
 
-                    images.add(pic)
+                    files.add(pic)
                 } while (cursor.moveToNext())
                 cursor.close()
             }
             val reSelection: ArrayList<DataItem> = ArrayList<DataItem>()
-            for (i in images.size - 1 downTo -1 + 1) {
-                reSelection.add(images[i])
+            for (i in files.size - 1 downTo -1 + 1) {
+                reSelection.add(files[i])
             }
-            images = reSelection
+            files = reSelection
+            Log.d("Number of items ",files.size.toString())
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
         var result=MutableLiveData<Result<List<DataItem>>>()
-        result.postValue(Result.Success(images))
+        result.postValue(Result.Success(files))
         return result
     }
 }
