@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main_data"
+    app:startDestination="@id/galleryMainFragment">
+
+    <fragment
+        android:id="@+id/galleryMainFragment"
+        android:name="com.aslam.samplegallery.ui.datalisting.GalleryMainFragment"
+        android:label="GalleryMainFragment"
+        tools:layout="@layout/fragment_gallery_main">
+
+        <action
+            android:id="@+id/actionDataListToDetails"
+            app:destination="@+id/dataDisplayFragment"
+
+            >
+           </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/dataDisplayFragment"
+        android:name="com.aslam.samplegallery.ui.datadetail.DataDisplayFragment"
+        android:label="DataDetailsFragment"
+        tools:layout="@layout/fragment_data_display">
+        <action
+            android:id="@+id/actionDataDisplayToPreview"
+            app:destination="@+id/previewFragment" />
+        <action
+            android:id="@+id/actionDataDisplayToVideo"
+            app:destination="@+id/videoFragment" />
+        <argument
+            android:name="dataDetail"
+            app:argType="com.aslam.samplegallery.data.DataFolder" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.aslam.samplegallery.ui.preview.video.VideoFragment"
+        android:label="VideoFragment"
+        tools:layout="@layout/fragment_video">
+        <argument
+            android:name="dataItem"
+            app:argType="com.aslam.samplegallery.data.DataItem" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="com.aslam.samplegallery.ui.preview.PreviewFragment"
+        android:label="PreviewFragment"
+        tools:layout="@layout/fragment_preview">
+        <argument
+            android:name="dataItemList"
+            app:argType="com.aslam.samplegallery.data.DataItemList" />
+        <argument
+            android:name="position"
+            app:argType="integer"
+            android:defaultValue="0"/>
+
+    </fragment>
+</navigation>
